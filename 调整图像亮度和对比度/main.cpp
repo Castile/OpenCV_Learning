@@ -15,6 +15,7 @@ int main()
 		cout << "image can not load..." << endl;
 		return -1;
 	}
+	cvtColor(src, src, COLOR_BGR2GRAY); // 单通道的灰度图像
 	char input[] = "输入";
 	imshow(input, src);
 	Mat dst = Mat::zeros(src.size(), src.type());
@@ -44,7 +45,7 @@ int main()
 			}
 			else if (src.channels() == 1) //单通道
 			{
-				float v = ml.at<uchar>(row, col);
+				float v = src.at<uchar>(row, col);
 				dst.at<uchar>(row, col) = saturate_cast<uchar>(v * alpha + beta);
 			}
 		}
